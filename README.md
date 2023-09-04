@@ -49,3 +49,6 @@
 
   Install Streamlit:
   `pip install streamlit`
+
+## Demo
+[Try it out](https://docclassifier-pc8ggtusva2whhdxyhhb7q.streamlit.app/)
