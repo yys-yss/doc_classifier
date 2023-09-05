@@ -63,3 +63,4 @@
 
 ## Demo
 [Try it out](https://docclassifier-pc8ggtusva2whhdxyhhb7q.streamlit.app/)
+> Please note that this demo does not support image files, as Streamlit requires local installation of Tesseract for image processing.
