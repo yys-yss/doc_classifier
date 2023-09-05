@@ -50,5 +50,16 @@
   Install Streamlit:
   `pip install streamlit`
 
+  [Install Tesseract-OCR](https://github.com/tesseract-ocr/tesseract)
+
+  #### Linux
+  To install Tesseract-OCR, run: 
+  `sudo apt install tesseract-ocr`
+
+  #### macOS
+  To install Tesseract-OCR, [install MacPorts](https://www.macports.org/install.php) and then run:
+  `sudo port install tesseract`
+  
+
 ## Demo
 [Try it out](https://docclassifier-pc8ggtusva2whhdxyhhb7q.streamlit.app/)
