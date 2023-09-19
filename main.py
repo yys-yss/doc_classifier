@@ -5,9 +5,10 @@ from PIL import Image
 import pytesseract
 import fitz
 from io import BytesIO
+import platform
 
-# pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
-
+if platform.system() == "Windows":
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 def extract_text_from_pdf(pdf_bytes):
     doc = fitz.open(stream=pdf_bytes, filetype="pdf")
@@ -18,11 +19,26 @@ def extract_text_from_pdf(pdf_bytes):
 
 
 def perform_ocr(img):
-    extracted_image_text = pytesseract.image_to_string(img)
+    try:
+        extracted_image_text = pytesseract.image_to_string(img)
+    except pytesseract.TesseractNotFoundError:
+        st.error("Tesseract was not found. Please install Tesseract OCR and specify the correct path.")
+        return None
     return extracted_image_text
 
+# Make a prediction
+def make_prediction(file_contents):
+    prediction = tf.sigmoid(classifier_model(tf.constant([file_contents])))
+    if prediction > 0.5:
+        st.write("Document Type: Invoice")
+    if prediction < 0.5:
+        st.write("Document Type: Contract")
+    elif prediction == 0.5:
+        st.write("Indecisive")
+        
+    
 
-classifier_model = tf.saved_model.load("doc_classifier/doc_classifier_SavedModel")
+classifier_model = tf.saved_model.load("doc_classifier_SavedModel")
 
 st.title('Document Classifier')
 
@@ -31,7 +47,7 @@ uploaded_file = st.file_uploader("Choose a text file", type=["txt"])
 if uploaded_file is not None:
     st.write("File uploaded successfully:")
     file_contents = uploaded_file.read().decode('utf-8')
-    st.code(file_contents, language="text")
+    make_prediction(file_contents)
 
 # Upload a PDF file
 uploaded_pdf = st.file_uploader("Choose a PDF file", type=["pdf"])
@@ -40,7 +56,7 @@ if uploaded_pdf is not None:
     pdf_bytes = uploaded_pdf.read()  # Read the PDF file as bytes
     pdf_text = extract_text_from_pdf(BytesIO(pdf_bytes))
     file_contents = pdf_text
-    st.code(file_contents, language="text")
+    make_prediction(file_contents)
 
 # Upload an image file
 uploaded_image = st.file_uploader("Choose an image file", type=['jpg', 'png', 'jpeg'])
@@ -49,17 +65,9 @@ if uploaded_image is not None:
     st.image(uploaded_image, caption="Uploaded image", use_column_width=True)
 
     image = Image.open(uploaded_image)
-    file_contents = perform_ocr(image)
-
-    st.write("Extracted Text:")
-    st.code(file_contents, language="text")
-
-# Show response if a file is uploaded
-if 'file_contents' in locals() or 'file_contents' in globals():
-    prediction = tf.sigmoid(classifier_model(tf.constant([file_contents])))
-    if prediction > 0.5:
-        st.write("Document Type: Invoice")
-    if prediction < 0.5:
-        st.write("Document Type: Contract")
-    elif prediction == 0.5:
-        st.write("Indecisive")
+    try:
+        file_contents = perform_ocr(image)
+        make_prediction(file_contents)
+    except Exception:
+        if 'file_contents' in locals():
+            del file_contents
