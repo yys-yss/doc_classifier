@@ -59,6 +59,17 @@
   #### macOS
   To install Tesseract-OCR, [install MacPorts](https://www.macports.org/install.php) and then run:
   `sudo port install tesseract`
+
+  ### Alternative options
+  If none of the options above are suitable/helpful, you can alternatively try to run the program from a [Docker](https://www.docker.com/) image.
+
+  0. [Install Docker](https://docs.docker.com/engine/install/)
+  1. Pull the Docker image `docker pull yysyss/doc-classifier`
+  2. Run the Docker container `docker run --name doc-classifier-container -p 8080:80 -d yysyss/doc-classifier`
+  3. On your web browser, go to **http://localhost:8080** to access the program.
+  4. To terminate the service use `docker stop doc-classifier-container`
+  5. To delete the container use `docker rm doc-classifier-container`
+  > Depending on your Linux distribution, you may need to run Docker commands with elevated privileges (using `sudo`) to avoid privilege errors.
   
 
 ## Demo
