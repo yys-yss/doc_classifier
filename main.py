@@ -6,7 +6,7 @@ import pytesseract
 import fitz
 from io import BytesIO
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+# pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 
 def extract_text_from_pdf(pdf_bytes):
@@ -22,7 +22,7 @@ def perform_ocr(img):
     return extracted_image_text
 
 
-classifier_model = tf.saved_model.load("doc_classifier_SavedModel")
+classifier_model = tf.saved_model.load("doc_classifier/doc_classifier_SavedModel")
 
 st.title('Document Classifier')
 
