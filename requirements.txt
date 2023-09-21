@@ -4,7 +4,3 @@ streamlit
 pytesseract
 Pillow
 PyMuPDF
-<<<<<<< HEAD
-=======
-tesseract-ocr
->>>>>>> dca7a2f (handle tesseract exceptions)
