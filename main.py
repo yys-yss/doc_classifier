@@ -23,6 +23,9 @@ def perform_ocr(img):
         extracted_image_text = pytesseract.image_to_string(img)
     except pytesseract.TesseractNotFoundError:
         st.error("Tesseract was not found. Please install Tesseract OCR and specify the correct path.")
+        tesseract_path = st.text_input("Tesseract path: ")
+        if tesseract_path is not None:
+            pytesseract.pytesseract.tesseract_cmd = tesseract_path
         return None
     return extracted_image_text
 
