@@ -70,8 +70,3 @@
   4. To terminate the service use `docker stop doc-classifier-container`
   5. To delete the container use `docker rm doc-classifier-container`
   > Depending on your Linux distribution, you may need to run Docker commands with elevated privileges (using `sudo`) to avoid privilege errors.
-  
-
-## Demo
-[Try it out](https://docclassifier-pc8ggtusva2whhdxyhhb7q.streamlit.app/)
-> Please note that this demo does not support image files, as Streamlit requires local installation of Tesseract for image processing.
