@@ -71,4 +71,3 @@ if uploaded_image is not None:
     except Exception:
         if 'file_contents' in locals():
             del file_contents
-            
