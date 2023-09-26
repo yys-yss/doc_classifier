@@ -2,6 +2,19 @@
  A program that performs binary classification (Contract/Invoice) using a fine-tuned BERT model.
 
  ## Installation
+ 
+  ### Recommended option
+  The fastest way to get this application running is from a [Docker](https://www.docker.com/) image.
+
+  0. [Install Docker](https://docs.docker.com/engine/install/)
+  1. Pull the Docker image `docker pull yysyss/doc-classifier:v1.2`
+  2. Run the Docker container `docker run -d -p 5500:5500 --name doc-classifier-container yysyss/doc-classifier:v1.2`
+  3. On your web browser, go to **http://localhost:5500** to access the program.
+  4. To terminate the service use `docker stop doc-classifier-container`
+  5. To delete the container use `docker rm doc-classifier-container`
+  > Depending on your Linux distribution, you may need to run Docker commands with elevated privileges (using `sudo`) to avoid privilege errors.
+
+ 
  ### Windows
  Since there are no tensorflow-text releases for TensorFlow's latest version, we have to use earlier versions.
 
@@ -59,14 +72,3 @@
   #### macOS
   To install Tesseract-OCR, [install MacPorts](https://www.macports.org/install.php) and then run:
   `sudo port install tesseract`
-
-  ### Alternative options
-  If none of the options above are suitable/helpful, you can alternatively try to run the program from a [Docker](https://www.docker.com/) image.
-
-  0. [Install Docker](https://docs.docker.com/engine/install/)
-  1. Pull the Docker image `docker pull yysyss/doc-classifier`
-  2. Run the Docker container `docker run --name doc-classifier-container -p 8080:80 -d yysyss/doc-classifier`
-  3. On your web browser, go to **http://localhost:8080** to access the program.
-  4. To terminate the service use `docker stop doc-classifier-container`
-  5. To delete the container use `docker rm doc-classifier-container`
-  > Depending on your Linux distribution, you may need to run Docker commands with elevated privileges (using `sudo`) to avoid privilege errors.
