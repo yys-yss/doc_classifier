@@ -17,7 +17,6 @@ def extract_text_from_pdf(pdf_bytes):
         text += page.get_text()
     return text
 
-
 def perform_ocr(img):
     try:
         extracted_image_text = pytesseract.image_to_string(img)
@@ -39,8 +38,6 @@ def make_prediction(file_contents):
     elif prediction == 0.5:
         st.write("Indecisive")
         
-    
-
 classifier_model = tf.saved_model.load("doc_classifier_SavedModel")
 
 st.title('Document Classifier')
